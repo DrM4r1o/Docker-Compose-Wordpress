@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: prueba
+      WORDPRESS_DB_PASSWORD: 1234
+      WORDPRESS_DB_NAME: pruebas
+    volumes:
+      - ./wordpress_vol:/var/www/html
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: pruebas
+      MYSQL_USER: prueba
+      MYSQL_PASSWORD: 1234
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - ./db_vol:/var/lib/mysql
+
+volumes:
+    wordpress: 
+    db: 
